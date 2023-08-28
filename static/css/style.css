@@ -1,0 +1,159 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Estilos del logo */
+.logo {
+    background-size: cover;
+    background-image: url("../css/img/fondo.webp");
+    border-radius: 30px;
+    padding: 20px;
+    text-align: center;
+    height: auto;
+}
+
+.logo img {
+    width: 100px;
+    height: 100px;
+    border-radius: 30px;
+}
+
+.logo h5 {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 25px;
+}
+
+.logo h1 {
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* Estilos de la barra de navegación */
+.navbar {
+    background-color: #2271b3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70px;
+}
+
+.nav-link {
+    margin: 0 20px;
+    letter-spacing: 1px;
+    color: #fff;
+    text-decoration: none;
+}
+
+.form-r{
+    width: 100vw;
+}
+
+.form {
+    width: 400px;
+    background: #24303c;
+    margin: auto;
+    padding: 30px;
+    margin-top: 100px;
+    margin-bottom: 100px;
+    border-radius: 4px;
+    
+}
+
+h4 {
+    margin-bottom: 20px;
+    font-size: 22px;
+    color: white;
+}
+
+.form-control{
+    width: 100%;
+    background: #24303c;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #1f53c5;
+    font-size: 16px;
+    color: grey;
+}
+
+.btn {
+    width: 100%;
+    background: #1f53c5;
+    padding: 10px;
+    
+    border: 1px solid #1f53c5;
+    font-size: 16px;
+    color: white;
+}
+
+body {
+    background-color: darkgray;
+}
+
+/* .form {
+    background-color: #2271b3;
+    border-radius: 30px;
+    padding: 20px; 
+    display: flex;   
+}
+
+.form-label {
+    color: #fff;
+}
+
+.form-control {
+    width: 100%;
+    border-radius: 5px;
+    margin-top: 5px;
+}
+
+.form span {
+    color: #fff;
+}
+
+.btn {
+    margin: 20px auto;
+    display: block;
+    background: #e3e4e5;
+    color: black;
+    text-align: center;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.card {
+    background-color: #d4cf6d;
+    color: black;
+    border-radius: 15px;
+    margin-left: 100px ;
+    padding: 20px;
+    text-align: center;
+}
+
+.card img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50px;
+}
+
+ */
+
+/* Estilos del pie de página */
+.footer {
+    background-color: #2271b3;
+    color: #fff;
+    text-align: center;
+    padding: 20px 0;
+}
+
+.copyr {
+    margin-top: 10px;
+}

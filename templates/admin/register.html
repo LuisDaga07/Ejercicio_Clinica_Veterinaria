@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>Register</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS v5.2.1 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+
+</head>
+
+<body>
+  <header>
+    <!-- place navbar here -->
+  </header>
+  <main>
+   <div class="container">
+       <div class="row">
+           <div class="col-4">
+               
+           </div>
+           
+           <div class="col-4">
+               <br>
+               <!--{% if mesage %}
+               <div class="alert alert-danger" role="alert">
+                 <strong>{{ mesage }}</strong> Some Word
+               </div>
+               
+               {% endif %}-->
+               <div class="card">
+                   <div class="card-header" >
+                       Registro de Usuario
+                   </div>
+                   <div class="card-body"> 
+                    <form action="{{url_for('roles_bp.register')}}" method="POST" class="row g-3 needs-validation" novalidate>
+                        {% if mesage is defined and mesage %}
+                            <div class="alert alert-warning">{{mesage
+                              }}</div>
+                        {% endif %}
+                      <div class="col-12">
+                        <label for="txtEmail" class="form-label">Tu correo electrónico </label>
+                        <input type="email" name="txtEmail" class="form-control" id="txtEmail" required>
+                        <div class="invalid-feedback">Por favor ingresa un correo electrónico válido!</div>
+                      </div>
+                      <div class="col-12">
+                        <label for="txtUsuario" class="form-label">Nombre de Usuario </label>
+                        <div class="input-group has-validation">
+                          <input type="text" name="txtUsuario" class="form-control" id="txtUsuario" required>
+                          <div class="invalid-feedback">Please choose a username.</div>
+                        </div>
+                      </div>
+                      <div class="col-12">
+                        <label for="txtPassword" class="form-label">Contraseña</label>
+                        <input type="password" name="txtPassword" class="form-control" id="txtPassword" required>
+                        <div class="invalid-feedback">Por favor ingresa una contraseña!</div>
+                      </div>
+                      <div class="col-12">
+                        <div class="form-check">
+                          <input class="form-check-input" name="terms" type="checkbox" value="" id="acceptTerms" required>
+                          <label class="form-check-label" for="acceptTerms">Estoy de acuerdo y acepto los <a href="">términos y condiciones</a></label>
+                          <div class="invalid-feedback">Deberías de aceptar antes de enviar el registro.</div>
+                        </div>
+                      </div>
+                      <div class="col-12">
+                        <button name="btnRegister" class="btn btn-success w-100" type="submit">Crear cuenta </button>
+                      </div>
+                    </form>
+                   </div>
+                   <div class="col-4">               
+                   </div>
+                   <div class="card-footer text-muted ">
+                       Footer
+                   </div>
+                   <div class="col-12">
+                    <p class="small mb-0">¿Ya tienes una cuenta? <a href="{{url_for('roles_bp.login')}}">Iniciar sesión </a></p>
+                   </div>
+               </div>
+           </div>
+       </div>
+   </div>
+
+
+  </main>
+  <footer>
+    <!-- place footer here -->
+  </footer>
+  <!-- Bootstrap JavaScript Libraries -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+    integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
+    integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
+  </script>
+</body>
+
+</html>
+
+
+
+

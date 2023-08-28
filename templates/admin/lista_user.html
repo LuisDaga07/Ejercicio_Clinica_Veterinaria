@@ -1,0 +1,39 @@
+{% include 'header.html' %}
+{% block title %} Gestion de Usuarios {%  endblock  %}
+    <div class="card">
+    <div class="table-responsive">
+        <table class="table table-primary">
+            {% for usuario in usuarios %}
+            <thead>
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Mascota</th>
+                    <th scope="col">Edad</th>
+                    <th scope="col">Raza</th>
+                    <th scope="col">Fecha</th>
+                    <th scope="col">Hora Cita</th>
+                    <th scope="col">Cliente</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="">
+                    <td scope="row">{{ usuario[0] }}</td>
+                    <td>{{ usuario[1] }}</td>
+                    <td>{{ usuario[2] }}</td>
+                    <td>{{ usuario[3] }}</td>
+                    <td>{{ usuario[4] }}</td>
+                    <td>{{ usuario[5] }}</td>
+                    <td>{{ usuario[6] }}</td>
+                </tr>
+            </tbody>
+            <td> 
+                <a class="btn btn-warning" href="/edit/{{usuario[0]}}">Editar</a>
+                <a onclick="return confirm('¿Desea borrar el Usuario?')" class="btn btn-danger"href="/destroy/{{usuario[0]}}">Eliminar</a>
+            </td> 
+            {% endfor %}   
+        </table>
+        
+    </div>
+</div>
+
+{% include 'footer.html' %}

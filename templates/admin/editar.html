@@ -1,0 +1,58 @@
+{% include 'header.html' %}
+
+{% for usuario in usuarios %}
+<form method="post" action="/update" enctype="multipart/form-data">
+    <div class="card-header">
+        Editar Usuario
+    </div>
+    <div class="card-body">
+        <h4 class="card-title">Datos del Cliente</h4>
+        <p class="card-text">
+
+            <div class="form-group">
+              <label for="txtMascota">Mascota</label>
+              <input type="text" value="{{usuario[1]}}" name="txtMascota" id="txtMascota" class="form-control">
+              
+            </div>
+             
+            <div class="form-group">
+              <label for="txtEdad">Edad</label>
+              <input type="text" value="{{usuario[2]}}" name="txtEdad" id="txtEdad" class="form-control" > 
+            </div>
+            
+            <div class="form-group">
+              <label for="txtRaza">Raza</label>
+              <input type="text" value="{{usuario[3]}}" name="txtRaza" id="txtRaza" class="form-control" > 
+            </div>
+
+            <div class="form-group">
+                <label for="txtFecha">Fecha</label>
+                <input type="date" value="{{usuario[4]}}" name="txtFecha" id="txtFecha" class="form-control" >    
+            </div>
+
+            <div class="form-group">
+                <label for="txtHora">Hora</label>
+                <input type="time" value="{{usuario[5]}}" name="txtHora" id="txtHora" class="form-control" >
+            </div>
+            
+            <div class="form-group">
+                <label for="txtAmo">Amo</label>
+                <input type="text" value="{{usuario[6]}}" name="txtAmo" id="txtAmo" class="form-control" >
+            </div>
+
+
+            
+                
+            <input type="" value="{{usuario[0]}}" name="txtID" id="txtID">
+            <br>
+            
+            <div class="form-group">
+             <input type="submit" class="btn btn-success" value="Agregar">
+             <a href="{{url_for('lista_u')}}" class="btn btn-primary">Regresar</a>
+            </div>
+        </p>
+    </div>
+</form>
+{% endfor %}
+
+{% include 'footer.html' %}

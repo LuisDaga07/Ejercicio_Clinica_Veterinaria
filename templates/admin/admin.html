@@ -1,0 +1,15 @@
+{% include 'header.html' %}
+<div class="p-5 mb-4 bg-light rounded-3 admin">
+    <div class="container-fluid py-5">
+      <h1 class="display-3 ">Bienvenid@ <strong>{{ session ['usuario']}}</strong> administrador del sitio web</h1>
+      <p class="lead">Aqui podra administrar los usuarios del sitio web</p>
+      <hr class="my-2">
+      <p class=lead>
+        <a class="btn btn-primary btn-lg" href="{{url_for('lista_u')}}" role="button">Empezar la gestion</a>
+    <img src="{{url_for('static', filename='css/')}}img/img_mascotas.webp" class="card-img-top" alt="...">    
+      </p>
+    </div>
+    </div>
+
+
+{% include 'footer.html' %}
