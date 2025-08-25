@@ -1,104 +1,382 @@
-<!doctype html>
-<html lang="en">
-
+<!DOCTYPE html>
+<html lang="es">
 <head>
-  <title>Register</title>
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro - Centro Veterinario</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --accent-color: #f59e0b;
+            --text-dark: #1f2937;
+            --text-light: #6b7280;
+            --white: #ffffff;
+            --light-gray: #f3f4f6;
+            --border-color: #e5e7eb;
+            --success-color: #10b981;
+            --error-color: #ef4444;
+            --warning-color: #f59e0b;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
 
-  <!-- Bootstrap CSS v5.2.1 -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .register-container {
+            background: var(--white);
+            border-radius: 1rem;
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
+            width: 100%;
+            max-width: 450px;
+            position: relative;
+        }
+
+        .register-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: var(--white);
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .register-header h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .register-header p {
+            opacity: 0.9;
+            font-size: 0.875rem;
+        }
+
+        .register-body {
+            padding: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            font-size: 0.875rem;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 2px solid var(--border-color);
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background-color: var(--white);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .form-control::placeholder {
+            color: var(--text-light);
+        }
+
+        .btn-register {
+            width: 100%;
+            background: linear-gradient(135deg, var(--success-color) 0%, #059669 100%);
+            color: var(--white);
+            padding: 0.875rem;
+            border: none;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 1rem;
+        }
+
+        .btn-register:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .alert {
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+            font-weight: 500;
+            font-size: 0.875rem;
+        }
+
+        .alert-warning {
+            background-color: #fef3c7;
+            color: #92400e;
+            border: 1px solid #fde68a;
+        }
+
+        .alert-danger {
+            background-color: #fee2e2;
+            color: #991b1b;
+            border: 1px solid #fecaca;
+        }
+
+        .register-footer {
+            text-align: center;
+            padding: 1rem 2rem 2rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .register-footer a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .register-footer a:hover {
+            color: var(--secondary-color);
+        }
+
+        .back-link {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            color: var(--white);
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: opacity 0.3s ease;
+        }
+
+        .back-link:hover {
+            opacity: 0.8;
+            color: var(--white);
+        }
+
+        .input-icon {
+            position: relative;
+        }
+
+        .input-icon i {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-light);
+            z-index: 1;
+        }
+
+        .input-icon .form-control {
+            padding-left: 2.5rem;
+        }
+
+        .form-check {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-check-input {
+            margin-top: 0.25rem;
+            width: 1rem;
+            height: 1rem;
+            accent-color: var(--primary-color);
+        }
+
+        .form-check-label {
+            font-size: 0.875rem;
+            color: var(--text-dark);
+            line-height: 1.4;
+        }
+
+        .form-check-label a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .form-check-label a:hover {
+            color: var(--secondary-color);
+        }
+
+        .password-strength {
+            margin-top: 0.5rem;
+            font-size: 0.75rem;
+            color: var(--text-light);
+        }
+
+        .strength-bar {
+            height: 4px;
+            background-color: var(--border-color);
+            border-radius: 2px;
+            margin-top: 0.25rem;
+            overflow: hidden;
+        }
+
+        .strength-fill {
+            height: 100%;
+            width: 0%;
+            transition: all 0.3s ease;
+        }
+
+        .strength-weak { background-color: var(--error-color); }
+        .strength-medium { background-color: var(--warning-color); }
+        .strength-strong { background-color: var(--success-color); }
+
+        @media (max-width: 480px) {
+            .register-container {
+                margin: 10px;
+            }
+            
+            .register-header,
+            .register-body {
+                padding: 1.5rem;
+            }
+        }
+    </style>
 </head>
 
 <body>
-  <header>
-    <!-- place navbar here -->
-  </header>
-  <main>
-   <div class="container">
-       <div class="row">
-           <div class="col-4">
-               
-           </div>
-           
-           <div class="col-4">
-               <br>
-               <!--{% if mesage %}
-               <div class="alert alert-danger" role="alert">
-                 <strong>{{ mesage }}</strong> Some Word
-               </div>
-               
-               {% endif %}-->
-               <div class="card">
-                   <div class="card-header" >
-                       Registro de Usuario
-                   </div>
-                   <div class="card-body"> 
-                    <form action="{{url_for('roles_bp.register')}}" method="POST" class="row g-3 needs-validation" novalidate>
-                        {% if mesage is defined and mesage %}
-                            <div class="alert alert-warning">{{mesage
-                              }}</div>
-                        {% endif %}
-                      <div class="col-12">
-                        <label for="txtEmail" class="form-label">Tu correo electrónico </label>
-                        <input type="email" name="txtEmail" class="form-control" id="txtEmail" required>
-                        <div class="invalid-feedback">Por favor ingresa un correo electrónico válido!</div>
-                      </div>
-                      <div class="col-12">
-                        <label for="txtUsuario" class="form-label">Nombre de Usuario </label>
-                        <div class="input-group has-validation">
-                          <input type="text" name="txtUsuario" class="form-control" id="txtUsuario" required>
-                          <div class="invalid-feedback">Please choose a username.</div>
+    <div class="register-container">
+                    <a href="{{ url_for('appointment.index') }}" class="back-link">
+            <i class="fas fa-arrow-left"></i> Volver al inicio
+        </a>
+        
+        <div class="register-header">
+            <h1><i class="fas fa-user-plus"></i> Crear Cuenta</h1>
+            <p>Regístrate para acceder al panel administrativo</p>
+        </div>
+        
+        <div class="register-body">
+            {% if mesage is defined and mesage %}
+                <div class="alert alert-warning">
+                    <i class="fas fa-exclamation-triangle"></i> {{ mesage }}
+                </div>
+            {% endif %}
+            
+            <form action="{{ url_for('auth.register') }}" method="POST">
+                <div class="form-group">
+                    <label for="txtEmail" class="form-label">
+                        <i class="fas fa-envelope"></i> Correo Electrónico
+                    </label>
+                    <div class="input-icon">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" class="form-control" name="txtEmail" id="txtEmail" 
+                               placeholder="tu@email.com" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="txtUsuario" class="form-label">
+                        <i class="fas fa-user"></i> Nombre de Usuario
+                    </label>
+                    <div class="input-icon">
+                        <i class="fas fa-user"></i>
+                        <input type="text" class="form-control" name="txtUsuario" id="txtUsuario" 
+                               placeholder="Nombre de usuario" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="txtPassword" class="form-label">
+                        <i class="fas fa-lock"></i> Contraseña
+                    </label>
+                    <div class="input-icon">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" class="form-control" name="txtPassword" id="txtPassword" 
+                               placeholder="Mínimo 6 caracteres" required minlength="6">
+                    </div>
+                    <div class="password-strength">
+                        <div class="strength-bar">
+                            <div class="strength-fill" id="strengthFill"></div>
                         </div>
-                      </div>
-                      <div class="col-12">
-                        <label for="txtPassword" class="form-label">Contraseña</label>
-                        <input type="password" name="txtPassword" class="form-control" id="txtPassword" required>
-                        <div class="invalid-feedback">Por favor ingresa una contraseña!</div>
-                      </div>
-                      <div class="col-12">
-                        <div class="form-check">
-                          <input class="form-check-input" name="terms" type="checkbox" value="" id="acceptTerms" required>
-                          <label class="form-check-label" for="acceptTerms">Estoy de acuerdo y acepto los <a href="">términos y condiciones</a></label>
-                          <div class="invalid-feedback">Deberías de aceptar antes de enviar el registro.</div>
-                        </div>
-                      </div>
-                      <div class="col-12">
-                        <button name="btnRegister" class="btn btn-success w-100" type="submit">Crear cuenta </button>
-                      </div>
-                    </form>
-                   </div>
-                   <div class="col-4">               
-                   </div>
-                   <div class="card-footer text-muted ">
-                       Footer
-                   </div>
-                   <div class="col-12">
-                    <p class="small mb-0">¿Ya tienes una cuenta? <a href="{{url_for('roles_bp.login')}}">Iniciar sesión </a></p>
-                   </div>
-               </div>
-           </div>
-       </div>
-   </div>
+                    </div>
+                </div>
+                
+                <div class="form-check">
+                    <input class="form-check-input" name="terms" type="checkbox" value="" id="acceptTerms" required>
+                    <label class="form-check-label" for="acceptTerms">
+                        Acepto los <a href="#" target="_blank">términos y condiciones</a> y la 
+                        <a href="#" target="_blank">política de privacidad</a>
+                    </label>
+                </div>
+                
+                <button type="submit" class="btn-register" name="btnRegister">
+                    <i class="fas fa-user-plus"></i> Crear Cuenta
+                </button>
+            </form>
+        </div>
+        
+        <div class="register-footer">
+            <p class="small mb-0">
+                ¿Ya tienes una cuenta? 
+                <a href="{{ url_for('auth.login') }}">
+                    <i class="fas fa-sign-in-alt"></i> Iniciar sesión
+                </a>
+            </p>
+        </div>
+    </div>
 
-
-  </main>
-  <footer>
-    <!-- place footer here -->
-  </footer>
-  <!-- Bootstrap JavaScript Libraries -->
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
-    integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
-  </script>
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
-    integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
-  </script>
+    <script>
+        // Validación de contraseña en tiempo real
+        document.getElementById('txtPassword').addEventListener('input', function() {
+            const password = this.value;
+            const strengthFill = document.getElementById('strengthFill');
+            
+            // Calcular fortaleza de la contraseña
+            let strength = 0;
+            if (password.length >= 6) strength++;
+            if (password.match(/[a-z]/)) strength++;
+            if (password.match(/[A-Z]/)) strength++;
+            if (password.match(/[0-9]/)) strength++;
+            if (password.match(/[^a-zA-Z0-9]/)) strength++;
+            
+            // Actualizar barra de fortaleza
+            const percentage = (strength / 5) * 100;
+            strengthFill.style.width = percentage + '%';
+            
+            // Cambiar color según fortaleza
+            strengthFill.className = 'strength-fill';
+            if (percentage <= 40) {
+                strengthFill.classList.add('strength-weak');
+            } else if (percentage <= 80) {
+                strengthFill.classList.add('strength-medium');
+            } else {
+                strengthFill.classList.add('strength-strong');
+            }
+        });
+    </script>
 </body>
-
 </html>
 
 

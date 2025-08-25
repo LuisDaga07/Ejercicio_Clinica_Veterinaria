@@ -1,94 +1,266 @@
-<!doctype html>
-<html lang="en">
-
+<!DOCTYPE html>
+<html lang="es">
 <head>
-  <title>Login del administrador</title>
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión - Centro Veterinario</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --accent-color: #f59e0b;
+            --text-dark: #1f2937;
+            --text-light: #6b7280;
+            --white: #ffffff;
+            --light-gray: #f3f4f6;
+            --border-color: #e5e7eb;
+            --success-color: #10b981;
+            --error-color: #ef4444;
+            --warning-color: #f59e0b;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
 
-  <!-- Bootstrap CSS v5.2.1 -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-</head>
-<body>
-     <br>
-     <br>
-     <br>
-    <div class="container">
-        <div class="row">
-            <div class="col-4">
-                
-            </div>
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .login-container {
+            background: var(--white);
+            border-radius: 1rem;
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
+            width: 100%;
+            max-width: 400px;
+            position: relative;
+        }
+
+        .login-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: var(--white);
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .login-header h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .login-header p {
+            opacity: 0.9;
+            font-size: 0.875rem;
+        }
+
+        .login-body {
+            padding: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            font-size: 0.875rem;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 2px solid var(--border-color);
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background-color: var(--white);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .form-control::placeholder {
+            color: var(--text-light);
+        }
+
+        .btn-login {
+            width: 100%;
+            background: linear-gradient(135deg, var(--success-color) 0%, #059669 100%);
+            color: var(--white);
+            padding: 0.875rem;
+            border: none;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 1rem;
+        }
+
+        .btn-login:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .alert {
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+            font-weight: 500;
+            font-size: 0.875rem;
+        }
+
+        .alert-danger {
+            background-color: #fee2e2;
+            color: #991b1b;
+            border: 1px solid #fecaca;
+        }
+
+        .login-footer {
+            text-align: center;
+            padding: 1rem 2rem 2rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .login-footer a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .login-footer a:hover {
+            color: var(--secondary-color);
+        }
+
+        .back-link {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            color: var(--white);
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: opacity 0.3s ease;
+        }
+
+        .back-link:hover {
+            opacity: 0.8;
+            color: var(--white);
+        }
+
+        .input-icon {
+            position: relative;
+        }
+
+        .input-icon i {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-light);
+            z-index: 1;
+        }
+
+        .input-icon .form-control {
+            padding-left: 2.5rem;
+        }
+
+        @media (max-width: 480px) {
+            .login-container {
+                margin: 10px;
+            }
             
-            <div class="col-4">
-                <br>
+            .login-header,
+            .login-body {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
 
-                <!--{% if mesage %}
-                <div class="alert alert-danger" role="alert">
-                  <strong>{{ mesage }}</strong> Some Word
+<body>
+    <div class="login-container">
+                    <a href="{{ url_for('appointment.index') }}" class="back-link">
+            <i class="fas fa-arrow-left"></i> Volver al inicio
+        </a>
+        
+        <div class="login-header">
+            <h1><i class="fas fa-user-shield"></i> Panel Administrativo</h1>
+            <p>Inicia sesión para gestionar las citas</p>
+        </div>
+        
+        <div class="login-body">
+            {% if mesage is defined and mesage %}
+                <div class="alert alert-danger">
+                    <i class="fas fa-exclamation-triangle"></i> {{ mesage }}
+                </div>
+            {% endif %}
+            
+            <form action="{{ url_for('auth.login') }}" method="post">
+                <div class="form-group">
+                    <label for="txtEmail" class="form-label">
+                        <i class="fas fa-envelope"></i> Correo Electrónico
+                    </label>
+                    <div class="input-icon">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" class="form-control" name="txtEmail" id="txtEmail" 
+                               placeholder="admin@veterinario.com" required>
+                    </div>
                 </div>
                 
-                {% endif %}-->
-
-                <div class="card">
-                    <div class="card-header" >
-                        Inicio de sesion 
-                    </div>
-                    <div class="card-body">
-                        <form action="{{ url_for('roles_bp.login') }}" method="post">
-                           
-                            {% if mesage is defined and mesage %}
-                             <div class="alert alert-danger"><strong>{{mesage
-                             }}</strong></div>
-                            {% endif %}
-                           
-                            <div class="mb-3" >
-                              <label for="txtEmail">Usuario</label>
-                              <input type="text" class="form-control" name="txtEmail" id="txtEmail" aria-describedby="helpId" placeholder="Escriba su usuario">
-                            </div>
-                            
-                            <div class="mb-3" >
-                                <label for="txtPassword">Contraseña</label>
-                                <input type="Password" class="form-control" name="txtPassword" id="txtPassword" aria-describedby="helpId" placeholder="Escriba su contraseña"> 
-                            </div>
-                             
-                            <button type="submit" class="btn btn-success" >Entrar</button>
-                        
-                        </form>
-                    </div>
-                    <div class="col-4">               
-                    </div>
-                    <div class="card-footer text-muted ">
-                        Footer
-                    </div>
-                    <div class="col-12">
-                      <p class="small mb-0">¿No tienes una cuenta?<a href="{{ url_for('roles_bp.register') }}"> Crear una cuenta</a></p>
+                <div class="form-group">
+                    <label for="txtPassword" class="form-label">
+                        <i class="fas fa-lock"></i> Contraseña
+                    </label>
+                    <div class="input-icon">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" class="form-control" name="txtPassword" id="txtPassword" 
+                               placeholder="Ingresa tu contraseña" required>
                     </div>
                 </div>
-            </div>
+                
+                <button type="submit" class="btn-login">
+                    <i class="fas fa-sign-in-alt"></i> Iniciar Sesión
+                </button>
+            </form>
+        </div>
+        
+        <div class="login-footer">
+            <p class="small mb-0">
+                ¿No tienes una cuenta? 
+                <a href="{{ url_for('auth.register') }}">
+                    <i class="fas fa-user-plus"></i> Crear cuenta
+                </a>
+            </p>
         </div>
     </div>
-
-
-  <header>
-    <!-- place navbar here -->
-  </header>
-  <main>
-
-  </main>
-  <footer>
-    <!-- place footer here -->
-  </footer>
-  <!-- Bootstrap JavaScript Libraries -->
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
-    integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
-  </script>
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
-    integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
-  </script>
 </body>
-
 </html>

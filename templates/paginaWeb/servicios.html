@@ -1,46 +1,301 @@
-<!doctype html>
-<html lang="en">
-
+<!DOCTYPE html>
+<html lang="es">
 <head>
-  <title>Clinica Veterinaria</title>
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-  <!-- Bootstrap CSS v5.2.1 -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
-   <link href="{{url_for('static', filename='css/')}}style.css" rel="stylesheet" type="text/css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Servicios Veterinarios - Centro Veterinario</title>
+    <meta name="description" content="Descubre todos nuestros servicios veterinarios especializados. Consultas, cirugías, vacunación, grooming y más.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link href="{{url_for('static', filename='css/style.css')}}" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
 <body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <img src="{{url_for('static', filename='css/img/logo_Practica.jpg')}}" alt="Logo Centro Veterinario">
+                <div class="logo-text">
+                    <h1>Centro Veterinario</h1>
+                    <p>Cuidado profesional para tu mascota</p>
+                </div>
+            </div>
+            
+            <nav class="navbar">
+                <a href="/" class="nav-link">
+                    <i class="fas fa-home"></i> Inicio
+                </a>
+                <a href="/service" class="nav-link active">
+                    <i class="fas fa-stethoscope"></i> Servicios
+                </a>
+                <a href="/service" class="nav-link">
+                    <i class="fas fa-pills"></i> Productos
+                </a>
+                <a href="/service" class="nav-link">
+                    <i class="fas fa-paw"></i> Guardería
+                </a>
+                <a href="/service" class="nav-link">
+                    <i class="fas fa-percent"></i> Promociones
+                </a>
+                <a href="{{ url_for('auth.login') }}" class="nav-link">
+                    <i class="fas fa-user"></i> Ingresar
+                </a>
+            </nav>
+        </div>
+    </header>
 
-<div>
-  <img src="{{url_for('static', filename='css/')}}img/img_mascotas.webp" class="card-img-top" alt="...">
-<div class="p-5 mb-4 bg-light rounded-3">
-  <div class="container-fluid py-5">
-    <h1 class="display-5 fw-bold">Bienvenido@</h1>
-    <p class="col-md-8 fs-4">Using a series of utilities, you can create this jumbotron, just like the one in previous versions of Bootstrap. Check out the examples below for how you can remix and restyle it to your liking.</p>
-    <button class="btn btn-primary btn-lg" type="button">Example button</button>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content fade-in-up">
+            <h1>Nuestros Servicios Veterinarios</h1>
+            <p>Ofrecemos una amplia gama de servicios especializados para garantizar la salud y bienestar de tu mascota con la más alta calidad profesional.</p>
+            <div class="hero-buttons">
+                <a href="#services" class="btn btn-primary">
+                    <i class="fas fa-list"></i> Ver Todos los Servicios
+                </a>
+                <a href="/" class="btn btn-secondary">
+                    <i class="fas fa-calendar-plus"></i> Agendar Cita
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Servicios Principales -->
+    <section class="services-section" id="services">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="mb-4">Servicios Especializados</h2>
+                <p class="text-muted">Contamos con un equipo de profesionales expertos y tecnología avanzada para brindar la mejor atención a tu mascota.</p>
+            </div>
+
+            <div class="services-grid">
+                <!-- Consulta General -->
+                <div class="service-card fade-in-up">
+                    <div class="service-icon">
+                        <i class="fas fa-user-md"></i>
+                    </div>
+                    <h3>Consulta General</h3>
+                    <p>Evaluación completa de la salud de tu mascota, incluyendo examen físico, diagnóstico y recomendaciones personalizadas.</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i> Examen físico completo</li>
+                        <li><i class="fas fa-check"></i> Diagnóstico profesional</li>
+                        <li><i class="fas fa-check"></i> Plan de tratamiento</li>
+                        <li><i class="fas fa-check"></i> Seguimiento médico</li>
+                    </ul>
+                    <a href="/" class="btn btn-primary">Agendar Consulta</a>
+                </div>
+
+                <!-- Vacunación -->
+                <div class="service-card fade-in-up">
+                    <div class="service-icon">
+                        <i class="fas fa-syringe"></i>
+                    </div>
+                    <h3>Vacunación</h3>
+                    <p>Programa completo de vacunación para proteger a tu mascota contra enfermedades comunes y mantener su salud óptima.</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i> Vacunas obligatorias</li>
+                        <li><i class="fas fa-check"></i> Vacunas opcionales</li>
+                        <li><i class="fas fa-check"></i> Control de calendario</li>
+                        <li><i class="fas fa-check"></i> Certificado de vacunación</li>
+                    </ul>
+                    <a href="/" class="btn btn-primary">Agendar Vacunación</a>
+                </div>
+
+                <!-- Cirugía -->
+                <div class="service-card fade-in-up">
+                    <div class="service-icon">
+                        <i class="fas fa-cut"></i>
+                    </div>
+                    <h3>Cirugía Veterinaria</h3>
+                    <p>Procedimientos quirúrgicos especializados con equipamiento de última generación y anestesia segura.</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i> Cirugías electivas</li>
+                        <li><i class="fas fa-check"></i> Cirugías de emergencia</li>
+                        <li><i class="fas fa-check"></i> Anestesia segura</li>
+                        <li><i class="fas fa-check"></i> Post-operatorio</li>
+                    </ul>
+                    <a href="/" class="btn btn-primary">Consultar Cirugía</a>
+                </div>
+
+                <!-- Laboratorio -->
+                <div class="service-card fade-in-up">
+                    <div class="service-icon">
+                        <i class="fas fa-microscope"></i>
+                    </div>
+                    <h3>Laboratorio Clínico</h3>
+                    <p>Análisis clínicos completos para un diagnóstico preciso y seguimiento del tratamiento de tu mascota.</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i> Análisis de sangre</li>
+                        <li><i class="fas fa-check"></i> Análisis de orina</li>
+                        <li><i class="fas fa-check"></i> Pruebas especializadas</li>
+                        <li><i class="fas fa-check"></i> Resultados rápidos</li>
+                    </ul>
+                    <a href="/" class="btn btn-primary">Solicitar Análisis</a>
+                </div>
+
+                <!-- Odontología -->
+                <div class="service-card fade-in-up">
+                    <div class="service-icon">
+                        <i class="fas fa-tooth"></i>
+                    </div>
+                    <h3>Odontología Veterinaria</h3>
+                    <p>Cuidado dental especializado para mantener la salud bucal de tu mascota y prevenir problemas dentales.</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i> Limpieza dental</li>
+                        <li><i class="fas fa-check"></i> Extracciones</li>
+                        <li><i class="fas fa-check"></i> Tratamiento periodontal</li>
+                        <li><i class="fas fa-check"></i> Prevención dental</li>
+                    </ul>
+                    <a href="/" class="btn btn-primary">Agendar Dental</a>
+                </div>
+
+                <!-- Grooming -->
+                <div class="service-card fade-in-up">
+                    <div class="service-icon">
+                        <i class="fas fa-droplet"></i>
+                    </div>
+                    <h3>Grooming Profesional</h3>
+                    <p>Servicio completo de peluquería y estética para que tu mascota se vea y se sienta mejor.</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i> Baño y secado</li>
+                        <li><i class="fas fa-check"></i> Corte de pelo</li>
+                        <li><i class="fas fa-check"></i> Corte de uñas</li>
+                        <li><i class="fas fa-check"></i> Tratamientos especiales</li>
+                    </ul>
+                    <a href="/" class="btn btn-primary">Agendar Grooming</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Servicios Adicionales -->
+    <section class="additional-services">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2>Servicios Adicionales</h2>
+                <p class="text-muted">Complementamos nuestros servicios principales con opciones adicionales para el cuidado integral de tu mascota.</p>
+            </div>
+
+            <div class="additional-services-grid">
+                <div class="additional-service-item">
+                    <i class="fas fa-heartbeat"></i>
+                    <h4>Emergencias 24/7</h4>
+                    <p>Atención de emergencias las 24 horas del día para casos urgentes.</p>
+                </div>
+                <div class="additional-service-item">
+                    <i class="fas fa-home"></i>
+                    <h4>Visitas a Domicilio</h4>
+                    <p>Servicio veterinario en la comodidad de tu hogar para casos especiales.</p>
+                </div>
+                <div class="additional-service-item">
+                    <i class="fas fa-pills"></i>
+                    <h4>Farmacia Veterinaria</h4>
+                    <p>Medicamentos y productos especializados para el cuidado de tu mascota.</p>
+                </div>
+                <div class="additional-service-item">
+                    <i class="fas fa-camera"></i>
+                    <h4>Radiografías</h4>
+                    <p>Diagnóstico por imágenes con equipamiento de alta calidad.</p>
+                </div>
+                <div class="additional-service-item">
+                    <i class="fas fa-dna"></i>
+                    <h4>Análisis Genéticos</h4>
+                    <p>Pruebas especializadas para detectar predisposiciones genéticas.</p>
+                </div>
+                <div class="additional-service-item">
+                    <i class="fas fa-shield-alt"></i>
+                    <h4>Seguro Veterinario</h4>
+                    <p>Asesoría en seguros veterinarios para proteger a tu mascota.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container text-center">
+            <h2>¿Listo para darle a tu mascota el mejor cuidado?</h2>
+            <p>Agenda una cita hoy mismo y descubre por qué somos la mejor opción para el cuidado de tu compañero fiel.</p>
+            <div class="cta-buttons">
+                <a href="/" class="btn btn-primary btn-lg">
+                    <i class="fas fa-calendar-plus"></i> Agendar Cita Ahora
+                </a>
+                <a href="tel:018000-2736-23" class="btn btn-secondary btn-lg">
+                    <i class="fas fa-phone"></i> Llamar Ahora
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3><i class="fas fa-clinic-medical"></i> Centro Veterinario</h3>
+                <p>Brindamos cuidado profesional y compasivo para tu mascota con los más altos estándares de calidad veterinaria.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h3><i class="fas fa-phone"></i> Contacto</h3>
+                <p><i class="fas fa-phone"></i> Línea gratuita: 018000-2736-23</p>
+                <p><i class="fas fa-envelope"></i> Email: info@centroveterinario.com</p>
+                <p><i class="fas fa-map-marker-alt"></i> Dirección: Calle Principal #123</p>
+                <p><i class="fas fa-clock"></i> Horario: Lunes a Domingo 8:00 AM - 8:00 PM</p>
+            </div>
+            
+            <div class="footer-section">
+                <h3><i class="fas fa-stethoscope"></i> Servicios</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Consulta General</a></li>
+                    <li><a href="#">Vacunación</a></li>
+                    <li><a href="#">Cirugía</a></li>
+                    <li><a href="#">Laboratorio</a></li>
+                    <li><a href="#">Grooming</a></li>
+                    <li><a href="#">Emergencias 24/7</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3><i class="fas fa-info-circle"></i> Información</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Sobre Nosotros</a></li>
+                    <li><a href="#">Nuestro Equipo</a></li>
+                    <li><a href="#">Testimonios</a></li>
+                    <li><a href="#">Blog Veterinario</a></li>
+                    <li><a href="#">Política de Privacidad</a></li>
+                    <li><a href="#">Términos y Condiciones</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2024 Centro Veterinario. Todos los derechos reservados. | Desarrollado con <i class="fas fa-heart" style="color: #ef4444;"></i> para el cuidado de mascotas</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"></script>
     
-  </div>
-  </div>
-</div>
-  
-  
-   
-   
-    
-
-
-  <!-- Bootstrap JavaScript Libraries -->
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
-    integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
-  </script>
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
-    integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
-  </script>
+    <!-- Custom JS -->
+    <script src="{{url_for('static', filename='js/main.js')}}"></script>
 </body>
-
 </html>

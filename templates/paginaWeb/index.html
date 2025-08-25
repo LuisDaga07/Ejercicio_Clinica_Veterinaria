@@ -1,127 +1,277 @@
-<!doctype html>
-<html lang="en">
-  
+<!DOCTYPE html>
+<html lang="es">
 <head>
-  <title>Clinica Veterinaria</title>
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-  <!-- Bootstrap CSS v5.2.1 -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
-   <link href="{{url_for('static', filename='css/')}}style.css" rel="stylesheet" type="text/css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Centro Veterinario - Cuidado Profesional para tu Mascota</title>
+    <meta name="description" content="Centro veterinario especializado en el cuidado y bienestar de tu mascota. Agenda tu cita médica con profesionales expertos.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link href="{{url_for('static', filename='css/style.css')}}" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
 <body>
-  <header>
-    
-<div class="logo">
-    <h5>Centro Veterinario</h5>
-    <h1>LOREM IPSUM</h1>
-    <img src="{{url_for('static', filename='css/')}}img/logo_Practica.jpg" alt=""></a>   
-</div>
-
-{% if mesage is defined and mesage %}
- <div class="alert alert-danger"><strong>{{mesage
-  }}</strong></div>
-{% endif %}
-
-  
-  <nav class="navbar navbar-expand-lg">
-    <div class="container-fluid">
-        
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" 
-      aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
-          <a class="nav-link" aria-current="page" href="/service">Servicios</a>
-          <a class="nav-link" href="/service">Productos</a>
-          <a class="nav-link" href="/service">Guarderia</a>
-          <a class="nav-link" href="/service">Promociones</a>
-          <a class="nav-link" href="{{ url_for('roles_bp.login') }}">Ingresar</a>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <img src="{{url_for('static', filename='css/img/logo_Practica.jpg')}}" alt="Logo Centro Veterinario">
+                <div class="logo-text">
+                    <h1>Centro Veterinario</h1>
+                    <p>Cuidado profesional para tu mascota</p>
+                </div>
+            </div>
+            
+            <nav class="navbar">
+                <a href="/" class="nav-link active">
+                    <i class="fas fa-home"></i> Inicio
+                </a>
+                <a href="/service" class="nav-link">
+                    <i class="fas fa-stethoscope"></i> Servicios
+                </a>
+                <a href="/service" class="nav-link">
+                    <i class="fas fa-pills"></i> Productos
+                </a>
+                <a href="/service" class="nav-link">
+                    <i class="fas fa-paw"></i> Guardería
+                </a>
+                <a href="/service" class="nav-link">
+                    <i class="fas fa-percent"></i> Promociones
+                </a>
+                <a href="{{ url_for('auth.login') }}" class="nav-link">
+                    <i class="fas fa-user"></i> Ingresar
+                </a>
+            </nav>
         </div>
-      </div>
-    </div>
-  </nav>
-  <!-- place navbar here -->
-</header>
-<br>
-<br>
-<!--    
-<div class="backg">
-  <div class="card" style="width: 25rem;">
-      
-      <img src="{{url_for('static', filename='css/')}}img/mascota1.jpg" alt="">
-      <div class="card-body">
-        <h5 class="card-title">Cuidado y educacion para su perro</h5>
-        <h6 class="card-subtitle mb-2 text-muted">Mascotas</h6>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        <a href="https://expopetcolombia.com/?utm_source=googleutm_medium=searchutm_campaign=posic&gclid=CjwKCAjwh4ObBhAzEiwAHzZYU1XIp8QdwAaUr2C6O_JnUE4RJooxBcnxF0s81x5eeXZr9yca1u08_BoCBFwQAvD_BwE" class="card-link">Ver mas...</a>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content fade-in-up">
+            <h1>Cuidado Profesional para tu Mascota</h1>
+            <p>Brindamos atención veterinaria de calidad con profesionales expertos y tecnología avanzada para garantizar el bienestar de tu compañero fiel.</p>
+            <div class="hero-buttons">
+                <a href="#appointment" class="btn btn-primary">
+                    <i class="fas fa-calendar-plus"></i> Agendar Cita
+                </a>
+                <a href="/service" class="btn btn-secondary">
+                    <i class="fas fa-info-circle"></i> Conocer Servicios
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="content-grid">
+            <!-- Información del centro -->
+            <div class="clinic-info fade-in-up">
+                <h2 class="mb-4">¿Por qué elegirnos?</h2>
+                
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-user-md"></i>
+                        </div>
+                        <h3>Profesionales Expertos</h3>
+                        <p>Equipo de veterinarios especializados con años de experiencia en el cuidado animal.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <h3>Atención 24/7</h3>
+                        <p>Servicio de emergencias disponible las 24 horas para casos urgentes.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <h3>Cuidado Compasivo</h3>
+                        <p>Tratamos a tu mascota con el amor y respeto que se merece.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-tools"></i>
+                        </div>
+                        <h3>Tecnología Avanzada</h3>
+                        <p>Equipamiento moderno para diagnósticos precisos y tratamientos efectivos.</p>
+                    </div>
+                </div>
+                
+                <div class="services-preview">
+                    <h3 class="mb-4">Nuestros Servicios Principales</h3>
+                    <div class="services-list">
+                        <div class="service-item">
+                            <i class="fas fa-syringe"></i>
+                            <span>Vacunación</span>
+                        </div>
+                        <div class="service-item">
+                            <i class="fas fa-cut"></i>
+                            <span>Cirugía</span>
+                        </div>
+                        <div class="service-item">
+                            <i class="fas fa-microscope"></i>
+                            <span>Laboratorio</span>
+                        </div>
+                        <div class="service-item">
+                            <i class="fas fa-tooth"></i>
+                            <span>Odontología</span>
+                        </div>
+                        <div class="service-item">
+                            <i class="fas fa-droplet"></i>
+                            <span>Grooming</span>
+                        </div>
+                        <div class="service-item">
+                            <i class="fas fa-pills"></i>
+                            <span>Farmacia</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Formulario de citas -->
+            <div class="appointment-form" id="appointment">
+                <h2><i class="fas fa-calendar-check"></i> Solicitar Cita Médica</h2>
+                
+                {% if mesage is defined and mesage %}
+                    {% if 'Satisfactoriamente' in mesage %}
+                        <div class="alert alert-success">
+                            <i class="fas fa-check-circle"></i> {{ mesage }}
+                        </div>
+                    {% else %}
+                        <div class="alert alert-error">
+                            <i class="fas fa-exclamation-triangle"></i> {{ mesage }}
+                        </div>
+                    {% endif %}
+                {% endif %}
+
+                <form action="{{url_for('appointment.index')}}" method="POST" class="appointment-form-content">
+                    <div class="form-group">
+                        <label for="txtMascota" class="form-label">
+                            <i class="fas fa-paw"></i> Nombre de la Mascota
+                        </label>
+                        <input type="text" class="form-control" id="txtMascota" name="txtMascota" 
+                               placeholder="Ej: Max, Luna, Rocky..." required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="txtEdad" class="form-label">
+                            <i class="fas fa-birthday-cake"></i> Edad
+                        </label>
+                        <input type="text" class="form-control" id="txtEdad" name="txtEdad" 
+                               placeholder="Ej: 3 años, 6 meses..." required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="txtRaza" class="form-label">
+                            <i class="fas fa-dog"></i> Raza
+                        </label>
+                        <input type="text" class="form-control" id="txtRaza" name="txtRaza" 
+                               placeholder="Ej: Golden Retriever, Persa..." required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="txtFecha" class="form-label">
+                            <i class="fas fa-calendar"></i> Fecha de Cita
+                        </label>
+                        <input type="date" class="form-control" id="txtFecha" name="txtFecha" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="txtHora" class="form-label">
+                            <i class="fas fa-clock"></i> Hora de Cita
+                        </label>
+                        <input type="time" class="form-control" id="txtHora" name="txtHora" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="txtAmo" class="form-label">
+                            <i class="fas fa-user"></i> Nombre del Propietario
+                        </label>
+                        <input type="text" class="form-control" id="txtAmo" name="txtAmo" 
+                               placeholder="Tu nombre completo" required>
+                    </div>
+
+                    <button type="submit" class="btn-submit">
+                        <i class="fas fa-paper-plane"></i> Agendar Cita
+                    </button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3><i class="fas fa-clinic-medical"></i> Centro Veterinario</h3>
+                <p>Brindamos cuidado profesional y compasivo para tu mascota con los más altos estándares de calidad veterinaria.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h3><i class="fas fa-phone"></i> Contacto</h3>
+                <p><i class="fas fa-phone"></i> Línea gratuita: 018000-2736-23</p>
+                <p><i class="fas fa-envelope"></i> Email: info@centroveterinario.com</p>
+                <p><i class="fas fa-map-marker-alt"></i> Dirección: Calle Principal #123</p>
+                <p><i class="fas fa-clock"></i> Horario: Lunes a Domingo 8:00 AM - 8:00 PM</p>
+            </div>
+            
+            <div class="footer-section">
+                <h3><i class="fas fa-stethoscope"></i> Servicios</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Consulta General</a></li>
+                    <li><a href="#">Vacunación</a></li>
+                    <li><a href="#">Cirugía</a></li>
+                    <li><a href="#">Laboratorio</a></li>
+                    <li><a href="#">Grooming</a></li>
+                    <li><a href="#">Emergencias 24/7</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3><i class="fas fa-info-circle"></i> Información</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Sobre Nosotros</a></li>
+                    <li><a href="#">Nuestro Equipo</a></li>
+                    <li><a href="#">Testimonios</a></li>
+                    <li><a href="#">Blog Veterinario</a></li>
+                    <li><a href="#">Política de Privacidad</a></li>
+                    <li><a href="#">Términos y Condiciones</a></li>
+                </ul>
+            </div>
+        </div>
         
-      </div>
-    </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Centro Veterinario. Todos los derechos reservados. | Desarrollado con <i class="fas fa-heart" style="color: #ef4444;"></i> para el cuidado de mascotas</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"></script>
     
-    <div class="card" style="width: 25rem;">
-      <img src="{{url_for('static', filename='css/')}}img/mascota.jpg" alt="">
-      <div class="card-body">
-        <h5 class="card-title">Salir de viaje con su mascota</h5>
-        <h6 class="card-subtitle mb-2 text-muted">Mascotas</h6>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        <a href="https://expopetcolombia.com/?utm_source=googleutm_medium=searchutm_campaign=posic&gclid=CjwKCAjwh4ObBhAzEiwAHzZYU1XIp8QdwAaUr2C6O_JnUE4RJooxBcnxF0s81x5eeXZr9yca1u08_BoCBFwQAvD_BwE" class="card-link">Ver mas...</a>
-      </div>
-    </div> -->
-        <div class="col-md-3 form">
-  <form action="{{url_for('index')}}" method="POST" class="row g-3 needs-validation" novalidate> 
-  
-    <div >
-    <h4>Solicitar Cita Medica</h4>
-     </div> 
-       
-      <!--<label for="txtMascota" class="form-label">Mascota:</label>-->
-      <input type="name" class="form-control" id="txtMascota" name="txtMascota" value="Mascota" required>
-    
-      <!--<label for="txtEdad" class="form-label">Edad:</label>-->
-      <input type="text" class="form-control" id="txtEdad" name="txtEdad" value="Edad" required>
-
-      <!--<label for="txtRaza" class="form-label">Raza:</label>-->
-      <input type="text" class="form-control" id="txtRaza" name="txtRaza" value="Raza" required>
-
-
-      <!--<label for="txtFecha" class="form-label">Fecha:</label>-->
-      <input type="date" class="form-control" id="txtFecha" name="txtFecha" value="Fecha" required>
-
-      <!--<label for="txtHora" class="form-label">Hora:</label>-->
-      <input type="time" class="form-control" id="txtHora" name="txtHora" value="Hora" required>
-
-      <!--<label for="txtAmo" class="form-label">Amo:</label>-->
-      <input type="name" class="form-control" id="txtAmo" name="txtAmo" value="Amo" required>
-
-      <button  class="btn " type="submit">VALIDAR CITA</button>
-    
-    </div>
-</form>
-<footer class="footer">
-     <div class="footer-1">
-        <span>Contactanos</span><br>
-        <span>Linea gratuita Nacional 018000-2736-23</span><br>
-        <span>Email:loremipsum@gmail.com</span>
-    </div>
-    <div class="copyr">
-        <span>&copy; Copyright <strong><span>Centro Veterinario Lorem Ipsum</span></strong>. Derechos Reservados</span>
-    </div>
-    <!-- place footer here -->
-  </footer>
-  <!-- Bootstrap JavaScript Libraries -->
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
-    integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
-  </script>
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
-    integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
-  </script>
+    <!-- Custom JS -->
+    <script src="{{url_for('static', filename='js/main.js')}}"></script>
 </body>
-
 </html>

@@ -1,39 +1,463 @@
-{% include 'header.html' %}
-{% block title %} Gestion de Usuarios {%  endblock  %}
-    <div class="card">
-    <div class="table-responsive">
-        <table class="table table-primary">
-            {% for usuario in usuarios %}
-            <thead>
-                <tr>
-                    <th scope="col">Id</th>
-                    <th scope="col">Mascota</th>
-                    <th scope="col">Edad</th>
-                    <th scope="col">Raza</th>
-                    <th scope="col">Fecha</th>
-                    <th scope="col">Hora Cita</th>
-                    <th scope="col">Cliente</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr class="">
-                    <td scope="row">{{ usuario[0] }}</td>
-                    <td>{{ usuario[1] }}</td>
-                    <td>{{ usuario[2] }}</td>
-                    <td>{{ usuario[3] }}</td>
-                    <td>{{ usuario[4] }}</td>
-                    <td>{{ usuario[5] }}</td>
-                    <td>{{ usuario[6] }}</td>
-                </tr>
-            </tbody>
-            <td> 
-                <a class="btn btn-warning" href="/edit/{{usuario[0]}}">Editar</a>
-                <a onclick="return confirm('¿Desea borrar el Usuario?')" class="btn btn-danger"href="/destroy/{{usuario[0]}}">Eliminar</a>
-            </td> 
-            {% endfor %}   
-        </table>
-        
-    </div>
-</div>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Citas - Centro Veterinario</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --accent-color: #f59e0b;
+            --text-dark: #1f2937;
+            --text-light: #6b7280;
+            --white: #ffffff;
+            --light-gray: #f3f4f6;
+            --border-color: #e5e7eb;
+            --success-color: #10b981;
+            --error-color: #ef4444;
+            --warning-color: #f59e0b;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
 
-{% include 'footer.html' %}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--light-gray);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        .admin-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: var(--white);
+            padding: 1rem 0;
+            box-shadow: var(--shadow);
+        }
+
+        .admin-header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .admin-logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .admin-logo img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .admin-logo h1 {
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+
+        .admin-nav {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .admin-nav a {
+            color: var(--white);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .admin-nav a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .admin-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 20px;
+        }
+
+        .page-header {
+            background: var(--white);
+            border-radius: 1rem;
+            box-shadow: var(--shadow);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .page-header h1 {
+            color: var(--text-dark);
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-header p {
+            color: var(--text-light);
+            font-size: 1.125rem;
+        }
+
+        .table-container {
+            background: var(--white);
+            border-radius: 1rem;
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
+        }
+
+        .table-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: var(--white);
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .table-header h2 {
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .table-stats {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: 700;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            opacity: 0.9;
+        }
+
+        .table-responsive {
+            overflow-x: auto;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .data-table th {
+            background: var(--light-gray);
+            color: var(--text-dark);
+            font-weight: 600;
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 2px solid var(--border-color);
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .data-table td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border-color);
+            vertical-align: middle;
+        }
+
+        .data-table tbody tr {
+            transition: all 0.3s ease;
+        }
+
+        .data-table tbody tr:hover {
+            background-color: var(--light-gray);
+        }
+
+        .pet-info {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .pet-avatar {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 1rem;
+        }
+
+        .pet-details h4 {
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 0.25rem;
+        }
+
+        .pet-details p {
+            font-size: 0.875rem;
+            color: var(--text-light);
+            margin: 0;
+        }
+
+        .date-time {
+            text-align: center;
+        }
+
+        .date {
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 0.25rem;
+        }
+
+        .time {
+            font-size: 0.875rem;
+            color: var(--text-light);
+            background: var(--light-gray);
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            display: inline-block;
+        }
+
+        .client-info {
+            font-weight: 500;
+            color: var(--text-dark);
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 0.5rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .btn-edit {
+            background: var(--warning-color);
+            color: var(--white);
+        }
+
+        .btn-edit:hover {
+            background: #d97706;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+            color: var(--white);
+        }
+
+        .btn-delete {
+            background: var(--error-color);
+            color: var(--white);
+        }
+
+        .btn-delete:hover {
+            background: #dc2626;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+            color: var(--white);
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 3rem 2rem;
+            color: var(--text-light);
+        }
+
+        .empty-state i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--border-color);
+        }
+
+        .empty-state h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+
+        @media (max-width: 768px) {
+            .admin-header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .table-header {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+            
+            .table-stats {
+                justify-content: center;
+            }
+            
+            .data-table th,
+            .data-table td {
+                padding: 0.75rem 0.5rem;
+                font-size: 0.875rem;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+                gap: 0.25rem;
+            }
+            
+            .btn {
+                padding: 0.375rem 0.75rem;
+                font-size: 0.75rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header Administrativo -->
+    <header class="admin-header">
+        <div class="admin-header-content">
+            <div class="admin-logo">
+                <img src="{{url_for('static', filename='css/img/logo_Practica.jpg')}}" alt="Logo">
+                <h1>Panel Administrativo</h1>
+            </div>
+            
+            <nav class="admin-nav">
+                <a href="{{url_for('auth.admin')}}">
+                    <i class="fas fa-home"></i> Dashboard
+                </a>
+                <a href="{{url_for('appointment.index')}}">
+                    <i class="fas fa-globe"></i> Ver Sitio
+                </a>
+                <a href="{{url_for('auth.logout')}}">
+                    <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="admin-container">
+        <!-- Encabezado de página -->
+        <div class="page-header">
+            <h1><i class="fas fa-users"></i> Gestión de Citas</h1>
+            <p>Administra todas las citas agendadas en el centro veterinario</p>
+        </div>
+
+        <!-- Tabla de citas -->
+        <div class="table-container">
+            <div class="table-header">
+                <h2><i class="fas fa-calendar-check"></i> Lista de Citas</h2>
+                <div class="table-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">{{ usuarios|length if usuarios else 0 }}</span>
+                        <span class="stat-label">Total Citas</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="table-responsive">
+                {% if usuarios %}
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Mascota</th>
+                                <th>Edad</th>
+                                <th>Raza</th>
+                                <th>Fecha y Hora</th>
+                                <th>Cliente</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for usuario in usuarios %}
+                            <tr>
+                                <td>
+                                    <div class="pet-info">
+                                        <div class="pet-avatar">
+                                            <i class="fas fa-paw"></i>
+                                        </div>
+                                        <div class="pet-details">
+                                            <h4>{{ usuario.mascota }}</h4>
+                                            <p>ID: {{ usuario.id }}</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>{{ usuario.edad }}</td>
+                                <td>{{ usuario.raza }}</td>
+                                <td>
+                                    <div class="date-time">
+                                        <div class="date">{{ usuario.fecha }}</div>
+                                        <div class="time">{{ usuario.hora }}</div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="client-info">
+                                        <i class="fas fa-user"></i> {{ usuario.amo }}
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <a href="/edit/{{usuario[0]}}" class="btn btn-edit">
+                                            <i class="fas fa-edit"></i> Editar
+                                        </a>
+                                        <a onclick="return confirm('¿Estás seguro de que deseas eliminar esta cita?')" 
+                                           href="/destroy/{{usuario[0]}}" class="btn btn-delete">
+                                            <i class="fas fa-trash"></i> Eliminar
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                {% else %}
+                    <div class="empty-state">
+                        <i class="fas fa-calendar-times"></i>
+                        <h3>No hay citas agendadas</h3>
+                        <p>Cuando los clientes agenden citas, aparecerán aquí.</p>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>

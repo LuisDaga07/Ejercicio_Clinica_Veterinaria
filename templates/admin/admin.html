@@ -1,15 +1,391 @@
-{% include 'header.html' %}
-<div class="p-5 mb-4 bg-light rounded-3 admin">
-    <div class="container-fluid py-5">
-      <h1 class="display-3 ">Bienvenid@ <strong>{{ session ['usuario']}}</strong> administrador del sitio web</h1>
-      <p class="lead">Aqui podra administrar los usuarios del sitio web</p>
-      <hr class="my-2">
-      <p class=lead>
-        <a class="btn btn-primary btn-lg" href="{{url_for('lista_u')}}" role="button">Empezar la gestion</a>
-    <img src="{{url_for('static', filename='css/')}}img/img_mascotas.webp" class="card-img-top" alt="...">    
-      </p>
-    </div>
-    </div>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Administrativo - Centro Veterinario</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --accent-color: #f59e0b;
+            --text-dark: #1f2937;
+            --text-light: #6b7280;
+            --white: #ffffff;
+            --light-gray: #f3f4f6;
+            --border-color: #e5e7eb;
+            --success-color: #10b981;
+            --error-color: #ef4444;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-{% include 'footer.html' %}
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--light-gray);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        .admin-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: var(--white);
+            padding: 1rem 0;
+            box-shadow: var(--shadow);
+        }
+
+        .admin-header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .admin-logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .admin-logo img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .admin-logo h1 {
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+
+        .admin-nav {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .admin-nav a {
+            color: var(--white);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .admin-nav a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .admin-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 20px;
+        }
+
+        .welcome-card {
+            background: var(--white);
+            border-radius: 1rem;
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
+            margin-bottom: 2rem;
+        }
+
+        .welcome-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: var(--white);
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .welcome-header h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .welcome-header p {
+            font-size: 1.125rem;
+            opacity: 0.9;
+        }
+
+        .welcome-body {
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .welcome-text h2 {
+            color: var(--text-dark);
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .welcome-text p {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+        }
+
+        .btn-admin {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, var(--accent-color) 0%, #d97706 100%);
+            color: var(--white);
+            padding: 0.875rem 2rem;
+            border: none;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .btn-admin:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+            color: var(--white);
+        }
+
+        .welcome-image {
+            text-align: center;
+        }
+
+        .welcome-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 1rem;
+            box-shadow: var(--shadow);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: var(--white);
+            padding: 1.5rem;
+            border-radius: 1rem;
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .stat-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            color: var(--white);
+            font-size: 1.5rem;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--text-light);
+            font-weight: 500;
+        }
+
+        .quick-actions {
+            background: var(--white);
+            border-radius: 1rem;
+            box-shadow: var(--shadow);
+            padding: 2rem;
+        }
+
+        .quick-actions h3 {
+            color: var(--text-dark);
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .actions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .action-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: var(--light-gray);
+            color: var(--text-dark);
+            padding: 1rem;
+            border-radius: 0.75rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .action-btn:hover {
+            background: var(--primary-color);
+            color: var(--white);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        @media (max-width: 768px) {
+            .admin-header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .welcome-body {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            }
+            
+            .actions-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header Administrativo -->
+    <header class="admin-header">
+        <div class="admin-header-content">
+            <div class="admin-logo">
+                <img src="{{url_for('static', filename='css/img/logo_Practica.jpg')}}" alt="Logo">
+                <h1>Panel Administrativo</h1>
+            </div>
+            
+            <nav class="admin-nav">
+                <a href="{{url_for('appointment.lista_usuarios')}}">
+                    <i class="fas fa-users"></i> Gestionar Citas
+                </a>
+                <a href="{{url_for('appointment.index')}}">
+                    <i class="fas fa-home"></i> Ver Sitio
+                </a>
+                <a href="{{url_for('auth.logout')}}">
+                    <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="admin-container">
+        <!-- Tarjeta de Bienvenida -->
+        <div class="welcome-card">
+            <div class="welcome-header">
+                <h1><i class="fas fa-user-shield"></i> Bienvenido, {{ session['usuario'] }}</h1>
+                <p>Panel de administración del Centro Veterinario</p>
+            </div>
+            
+            <div class="welcome-body">
+                <div class="welcome-text">
+                    <h2><i class="fas fa-cog"></i> Gestión del Sistema</h2>
+                    <p>Desde aquí podrás administrar todas las citas de mascotas, ver el historial de pacientes y gestionar la información del centro veterinario de manera eficiente y segura.</p>
+                    <a href="{{url_for('appointment.lista_usuarios')}}" class="btn-admin">
+                        <i class="fas fa-users"></i> Gestionar Citas
+                    </a>
+                </div>
+                
+                <div class="welcome-image">
+                    <img src="{{url_for('static', filename='css/img/img_mascotas.webp')}}" alt="Mascotas">
+                </div>
+            </div>
+        </div>
+
+        <!-- Estadísticas Rápidas -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-calendar-check"></i>
+                </div>
+                <div class="stat-number">{{ usuarios|length if usuarios else 0 }}</div>
+                <div class="stat-label">Citas Agendadas</div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-clock"></i>
+                </div>
+                <div class="stat-number">24/7</div>
+                <div class="stat-label">Disponibilidad</div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <div class="stat-number">100%</div>
+                <div class="stat-label">Satisfacción</div>
+            </div>
+        </div>
+
+        <!-- Acciones Rápidas -->
+        <div class="quick-actions">
+            <h3><i class="fas fa-bolt"></i> Acciones Rápidas</h3>
+            <div class="actions-grid">
+                <a href="{{url_for('appointment.lista_usuarios')}}" class="action-btn">
+                    <i class="fas fa-list"></i>
+                    <span>Ver Todas las Citas</span>
+                </a>
+                <a href="{{url_for('appointment.index')}}" class="action-btn">
+                    <i class="fas fa-eye"></i>
+                    <span>Ver Sitio Web</span>
+                </a>
+                <a href="#" class="action-btn">
+                    <i class="fas fa-chart-bar"></i>
+                    <span>Reportes</span>
+                </a>
+                <a href="#" class="action-btn">
+                    <i class="fas fa-cog"></i>
+                    <span>Configuración</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
